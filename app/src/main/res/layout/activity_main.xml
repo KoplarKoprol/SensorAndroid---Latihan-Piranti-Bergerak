@@ -7,28 +7,109 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/tvStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Menunggu Sensor..."
-        android:textSize="24sp"
-        android:textStyle="bold"
+    <!-- Layout Utama (Simulasi Game) -->
+    <LinearLayout
+        android:id="@+id/layoutUtama"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Simulasi Game Balap"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/tvStatusSetir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Lurus"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvSumbuX"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Sumbu X: 0.00"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btnKirim"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="#B39DDB"
+            android:text="Kirim ke Cloud"
+            android:textAllCaps="false"
+            android:textColor="#000000" />
+
+        <Button
+            android:id="@+id/btnRiwayat"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#B39DDB"
+            android:text="Lihat Riwayat"
+            android:textAllCaps="false"
+            android:textColor="#000000" />
+
+    </LinearLayout>
+
+    <!-- Layout Riwayat (Muncul saat tombol ditekan) -->
+    <LinearLayout
+        android:id="@+id/layoutRiwayat"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvTitleRiwayat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Riwayat Kemiringan Perangkat"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:id="@+id/tvDataRiwayat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Belum ada data..."
+                android:textSize="16sp" />
+        </ScrollView>
+
+        <Button
+            android:id="@+id/btnKembali"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Kembali" />
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/tvNilai"
+        android:id="@+id/tvStatusLight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="0 lux"
-        android:textSize="18sp"
+        android:layout_marginBottom="10dp"
+        android:text="Sensor Cahaya: Aktif"
+        android:textSize="10sp"
+        android:alpha="0.5"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvStatus" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
