@@ -29,31 +29,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             insets
         }
 
-        override fun onSensorChanged(event: SensorEvent?) {
-            if (event?.sensor?.type == Sensor.TYPE_LIGHT) {
-                val nilaiCahaya = event.values[0]
-
-                if (nilaiCahaya < 10) {
-                    tvStatus.text = "Kondisi: Gelap ($nilaiCahaya lux)
-                } else {
-                    tvStatus.text = "Kondisi: Terang ($nilaiCahaya lux)"
-                }
-            }
-        }
-
-        override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
-            TODO("Not yet implemented")
-        }
-
-        override fun onResume() {
-            super.onResume()
-            lightSensor?.let {
-                sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_NORMAL)
-            }
-        }
-
-//        Inisialaisasi sensor dan view
-
+        // Inisialisasi sensor dan view
         tvStatus = findViewById(R.id.tvStatus)
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
@@ -61,5 +37,33 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         if (lightSensor == null) {
             tvStatus.text = "Sensor Cahaya Tidak Tersedia"
         }
+    }
+
+    override fun onSensorChanged(event: SensorEvent?) {
+        if (event?.sensor?.type == Sensor.TYPE_LIGHT) {
+            val nilaiCahaya = event.values[0]
+
+            if (nilaiCahaya < 10) {
+                tvStatus.text = "Kondisi: Gelap ($nilaiCahaya lux)"
+            } else {
+                tvStatus.text = "Kondisi: Terang ($nilaiCahaya lux)"
+            }
+        }
+    }
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+        // Not needed for this example
+    }
+
+    override fun onResume() {
+        super.onResume()
+        lightSensor?.let {
+            sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_NORMAL)
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        sensorManager.unregisterListener(this)
     }
 }
